@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Industrial Map — Кунгурский</title>
+<link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+<div class="app">
+  <div class="top-search">
+    <input id="searchInput" type="search" placeholder="Поиск по имени, виду или цеху">
+    <button class="btn" id="clearSearchBtn" type="button">Очистить</button>
+  </div>
+  <div class="map-shell">
+    <div class="map-stage" id="mapStage">
+      <svg id="mapSvg" viewBox="0 0 2048 1290" aria-label="Industrial Map">
+        <image id="baseMapImage" href="assets/map-base.png" x="0" y="0" width="2048" height="1290" preserveAspectRatio="none"></image>
+        <g id="workshopLayer"></g>
+        <g id="legendLayer"></g>
+      </svg>
+    </div>
+  </div>
+  <aside class="bottom-menu">
+    <div class="menu-toolbar">
+      <button class="btn" id="layersBtn">Слои</button>
+      <button class="btn btn-primary" id="addLegendBtn">+ Добавить легенду</button>
+      <button class="btn" id="logoutBtn">Выйти</button>
+    </div>
+    <div class="menu-content" id="menuContent"></div>
+  </aside>
+  <div id="toast" class="toast hidden"></div>
+</div>
+<script src="js/config.js"></script>
+<script src="map/map-data.js"></script>
+<script src="js/api.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

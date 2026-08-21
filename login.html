@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Авторизация</title>
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+<main class="login-page">
+  <section class="login-card">
+    <h1>Авторизация</h1>
+    <p class="muted">Интерактивная карта цехов</p>
+
+    <form id="loginForm">
+      <label>
+        Логин
+        <input id="username" name="username" autocomplete="username" required>
+      </label>
+
+      <label>
+        Пароль
+        <input id="password" name="password" type="password" autocomplete="current-password" required>
+      </label>
+
+      <button class="btn btn-primary" type="submit">Войти</button>
+      <div id="loginError" class="login-error"></div>
+    </form>
+
+    <p class="muted">Для получения доступа обратитесь в техническую поддержку.</p>
+  </section>
+</main>
+
+<script src="js/config.js"></script>
+<script src="js/api.js"></script>
+<script>
+  if (localStorage.getItem('mkk_token')) {
+    location.href = 'index.html';
+  }
+
+  document.getElementById('loginForm').addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const error = document.getElementById('loginError');
+    error.textContent = '';
+
+    try {
+      const result = await apiRequest('/auth/login.php', {
+        method: 'POST',
+        body: {
+          username: document.getElementById('username').value,
+          password: document.getElementById('password').value
+        },
+        auth: false
+      });
+
+      localStorage.setItem('mkk_token', result.token);
+      location.href = 'index.html';
+    } catch (e) {
+      error.textContent = e.message;
+    }
+  });
+</script>
+</body>
+</html>
